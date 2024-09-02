@@ -10,13 +10,15 @@ namespace SpendSmart
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            // Add services to the container. before the app is built
             builder.Services.AddControllersWithViews();
 
-            //configured our inMemoryDatabase
             builder.Services.AddDbContext<SpendSmartDbContext>(options =>
-              options.UseInMemoryDatabase("SpendSmartDb")
-              );
+            {
+                //configured our inMemoryDatabase
+                //options.UseInMemoryDatabase("SpendSmartDb")
+                options.UseSqlServer("Server=localhost;Database=ExpenseDB;Trusted_Connection=True;TrustServerCertificate=True;");
+            });
 
             var app = builder.Build();
 

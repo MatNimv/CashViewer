@@ -7,7 +7,7 @@
 @model SpendSmart.Models.Expense
 
 <div class="text-center">
-    <h1 class="display-4">Create or Add an Expense</h1>
+    <h1 class="display-4">Add an Expense</h1>
 </div>
 
 <!-- 
@@ -18,7 +18,25 @@
     <label class="mt-4">Value ;-</label>
     <input class="form-control" type="number" placeholder="0" asp-for="Value" step="0.01" />
     <label class="mt-4">Description</label>
-    <input class="form-control" type="text" placeholder="Add a description" asp-for="Description" />
+    <input class="form-control" id="description" type="text" placeholder="Add a description" asp-for="Description" />
 
     <button class="btn-primary mt-4" type="submit">OK</button>
 </form>
+
+<div id="error" class="text-center"></div>
+
+<script>
+    window.addEventListener('submit', function (event) {
+        var error = document.getElementById("error");
+        error.innerHTML = "Please fill in description of the expense."
+        // Fetch the elements we want to apply validation to
+        var form_description = document.getElementById('description');
+        
+        //if description is empty, user won't be able to continue
+        if (form_description.value == null || !form_description.value.trim()) {
+            event.preventDefault()
+            event.stopPropagation()
+            error.innerHTML = "Please fill in description of the expense."
+        }
+    })
+</script>

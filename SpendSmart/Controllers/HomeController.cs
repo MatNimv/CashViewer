@@ -67,9 +67,20 @@ namespace SpendSmart.Controllers
                 _context.Expenses.Update(model);
             }
 
+            //if(model.Description == null)
+            //{
+            //    ModelState.AddModelError("Description", "Description is required.");
+            //    return RedirectToAction("CreateEditExpense"); // Stay on the same page and display the form again with the validation message.
+            //}
+            //else
+            //{
+//
+            //}
             //not only do we need to add, but also SAVE the changes
             _context.SaveChanges();
             return RedirectToAction("Expenses");
+
+
         }
 
 
